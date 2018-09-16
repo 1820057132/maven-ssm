@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/jquery-1.11.3.min.js"></script>
+</head>
+<body>
+<h1>SSM hello</h1>
+
+输入您所查询的游戏id：<input type="text" id="id">
+<br>
+<button id="but">点点点</button>
+<br>
+<h1>游戏名：</h1>
+<div id="game"></div>
+
+
+<script type="text/javascript">
+    $("#but").click(function () {
+        var data = {
+            id:$("#id").val()
+        }
+        $.ajax({
+            url:"game/getName",
+            type:"post",
+            data:data,
+            dataType:"json",
+            success:function (result) {
+                $("#game").html("<h1>" + result["name"]+ "</h1>")
+            }
+        })
+
+    })
+
+
+</script>
+</body>
+</html>

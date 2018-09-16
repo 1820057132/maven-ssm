@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<!-- Game -->
+<mapper namespace="com.neusoft.SSMTest.mapper.GameMapper">
+
+    <resultMap id="Game" type="com.neusoft.SSMTest.bean.Game">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="hot" column="hot"/>
+        <result property="icon" column="icon"/>
+        <result property="letter" column="letter"/>
+        <result property="homepage" column="homepage"/>
+        <result property="type" column="type"/>
+    </resultMap>
+
+    <sql id="where">
+        <trim prefix="WHERE" prefixOverrides="AND|OR">
+            <if test="id != null">
+                AND id = #{id}
+            </if>
+            <if test="name != null and name != ''">
+                AND name = #{name}
+            </if>
+            <if test="hot != null">
+                AND hot = #{hot}
+            </if>
+            <if test="icon != null and icon != ''">
+                AND icon = #{icon}
+            </if>
+            <if test="letter != null and letter != ''">
+                AND letter = #{letter}
+            </if>
+            <if test="homepage != null and homepage != ''">
+                AND homepage = #{homepage}
+            </if>
+            <if test="type != null and type != ''">
+                AND type = #{type}
+            </if>
+        </trim>
+    </sql>
+    <sql id="Base_Column_List">
+        id id ,
+        name name ,
+        hot hot ,
+        icon icon ,
+        letter letter ,
+        homepage homepage ,
+        type type
+    </sql>
+    <select id="selectOne" resultType="com.neusoft.SSMTest.bean.Game"
+            parameterType="com.neusoft.SSMTest.bean.Game">
+        select
+        <include refid="Base_Column_List"/>
+        from game
+        <include refid="where"></include>
+    </select>
+    <select id="selectAll" resultType="com.neusoft.SSMTest.bean.Game">
+        SELECT
+        <include refid="Base_Column_List"/>
+        from game
+        <include refid="where"></include>
+    </select>
+    <insert id="insert" parameterType="com.neusoft.SSMTest.bean.Game">
+        insert into game (
+        <trim suffixOverrides=",">
+            <if test="id != null">
+                id ,
+            </if>
+            <if test="name != null and name != '' ">
+                name ,
+            </if>
+            <if test="hot != null">
+                hot ,
+            </if>
+            <if test="icon != null and icon != '' ">
+                icon ,
+            </if>
+            <if test="letter != null and letter != '' ">
+                letter ,
+            </if>
+            <if test="homepage != null and homepage != '' ">
+                homepage ,
+            </if>
+            <if test="type != null and type != '' ">
+                type
+            </if>
+        </trim>
+        ) VALUES (
+        <trim suffixOverrides=",">
+            <if test="id != null">
+                #{id} ,
+            </if>
+            <if test="name != null and name != '' ">
+                #{name} ,
+            </if>
+            <if test="hot != null">
+                #{hot} ,
+            </if>
+            <if test="icon != null and icon != '' ">
+                #{icon} ,
+            </if>
+            <if test="letter != null and letter != '' ">
+                #{letter} ,
+            </if>
+            <if test="homepage != null and homepage != '' ">
+                #{homepage} ,
+            </if>
+            <if test="type != null and type != '' ">
+                #{type}
+            </if>
+        </trim>
+        )
+    </insert>
+    <update id="update" parameterType="com.neusoft.SSMTest.bean.Game">
+        UPDATE game
+        <set>
+            <if test="name != null and name != '' ">
+                name = #{name} ,
+            </if>
+
+            <if test="hot != null">
+                hot = #{hot} ,
+            </if>
+
+            <if test="icon != null and icon != '' ">
+                icon = #{icon} ,
+            </if>
+
+            <if test="letter != null and letter != '' ">
+                letter = #{letter} ,
+            </if>
+
+            <if test="homepage != null and homepage != '' ">
+                homepage = #{homepage} ,
+            </if>
+
+            <if test="type != null and type != '' ">
+                type = #{type}
+            </if>
+
+        </set>
+        WHERE
+        id = #{id}
+    </update>
+
+
+    <delete id="deleteByPK" parameterType="com.neusoft.SSMTest.bean.Game">
+        DELETE FROM game WHERE
+        id = #{id}
+    </delete>
+
+
+</mapper>

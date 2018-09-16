@@ -1,0 +1,67 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+		http://www.springframework.org/schema/mvc
+		http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!--<mvc:resources mapping="/jsp/**" location="/WEB-INF/jsp/" />你要访问的文件目录-->
+
+    <mvc:annotation-driven>
+        <!-- 消息转换器,解决responseBody返回中外乱码问题 -->
+        <mvc:message-converters register-defaults="true">
+            <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+                <property name="supportedMediaTypes" value="text/plain;charset=UTF-8" />
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+
+
+
+    <mvc:default-servlet-handler/>
+    <mvc:resources mapping="/js/**" location="/WEB-INF/js/"/>
+    <mvc:resources mapping="/img/**" location="/WEB-INF/img/"/>
+    <mvc:resources mapping="/css/**" location="/WEB-INF/css/"/>
+
+    <context:component-scan base-package="com.neusoft"/>
+
+    <!--<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+        &lt;!&ndash; 校验器，使用hibernate校验器 &ndash;&gt;
+        <property name="providerClass" value="org.hibernate.validator.HibernateValidator"/>
+        &lt;!&ndash; 指定校验使用的资源文件，在文件中配置校验错误信息，如果不指定则默认使用classpath下面的ValidationMessages.properties文件 &ndash;&gt;
+        <property name="validationMessageSource" ref="messageSource"/>
+    </bean>
+    &lt;!&ndash; 校验错误信息配置文件 &ndash;&gt;
+    <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+        &lt;!&ndash; 资源文件名 &ndash;&gt;
+        <property name="basenames">
+            <list>
+                <value>classpath:errorMessage</value>
+            </list>
+        </property>
+        &lt;!&ndash; 资源文件编码格式 &ndash;&gt;
+        <property name="fileEncodings" value="utf-8"/>
+        &lt;!&ndash; 对资源文件内容缓存时间，单位秒 &ndash;&gt;
+        <property name="cacheSeconds" value="120"/>
+    </bean>-->
+
+
+    <!-- 注解驱动,替换处理器映射器、处理器适配器
+    <mvc:annotation-driven validator="validator" />-->
+
+    <!--静态资源映射地址-->
+
+    <!--<mvc:resources mapping="/upload/**" location="/upload/"/>-->
+
+
+    <!--拦截器配置-->
+   <!-- <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/spring/**"/>
+            <bean class="com.neusoft.springMVCTest.common.MyInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>-->
+
+</beans>
